@@ -1,0 +1,97 @@
+#+TITLE: LedArrayTester
+#+AUTHOR: Peter Polidoro
+#+EMAIL: peter@polidoro.io
+
+* Library Information
+- Name: LedArrayTester
+- Description: Test code for the Branson lab LED array real time classifier performance measurement device.
+- Version: 0.1.0
+- Release Date: 2023-10-11
+- Creation Date: 2023-10-11
+- License: BSD-3-Clause
+- URL: https://github.com/janelia-arduino/LedArrayTester
+- Author: Peter Polidoro
+- Email: peter@polidoro.io
+- Copyright: 2023 Howard Hughes Medical Institute
+
+* Development
+
+** Download this repository
+
+[[https://github.com/janelia-arduino/LedArrayTester.git]]
+
+#+BEGIN_SRC sh
+sudo apt install -y git
+mkdir -p ~/tmp && cd ~/tmp && git clone https://github.com/janelia-arduino/LedArrayTester.git
+#+END_SRC
+
+** PlatformIO
+
+*** Install PlatformIO Core
+
+[[https://docs.platformio.org/en/latest/core/installation/index.html]]
+
+**** Example
+
+#+BEGIN_SRC sh
+sudo apt install -y python3-venv make
+cd ~/tmp/LedArrayTester
+make venv
+#+END_SRC
+
+**** 99-platformio-udev.rules
+
+Linux users have to install udev rules for PlatformIO supported boards/devices.
+
+***** Download udev rules file to /etc/udev/rules.d
+
+#+BEGIN_SRC sh
+curl -fsSL https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/system/99-platformio-udev.rules | sudo tee /etc/udev/rules.d/99-platformio-udev.rules
+#+END_SRC
+
+***** Restart udev management tool
+
+#+BEGIN_SRC sh
+sudo service udev restart
+#+END_SRC
+
+***** Add user to groups
+
+#+BEGIN_SRC sh
+sudo usermod -a -G dialout $USER
+sudo usermod -a -G plugdev $USER
+#+END_SRC
+
+***** Remove modemmanager
+
+#+BEGIN_SRC sh
+sudo apt-get purge --auto-remove modemmanager
+#+END_SRC
+
+
+*** Compile the firmware
+
+**** Example
+
+#+BEGIN_SRC sh
+cd ~/tmp/LedArrayTester
+make firmware
+#+END_SRC
+
+*** Upload the firmware
+
+**** Example
+
+#+BEGIN_SRC sh
+cd ~/tmp/LedArrayTester
+make upload
+#+END_SRC
+
+*** Monitor
+
+**** Example
+
+#+BEGIN_SRC sh
+cd ~/tmp/LedArrayTester
+make monitor
+#+END_SRC
